@@ -239,7 +239,21 @@ class RSCTGatekeeper:
                     modified_actions[max(i, j)] = Action.STAY
 
             elif self.config.blocking_strategy == BlockingStrategy.PRIORITY_BY_ID:
-                modified_actions[max(i, j)] = Action.STAY
+                # Determine which agent is moving INTO the other's current cell
+                next_i = next_positions[i]
+                next_j = next_positions[j]
+                i_invading_j = (next_i == current_positions[j])
+                j_invading_i = (next_j == current_positions[i])
+
+                if i_invading_j and not j_invading_i:
+                    # i is invading j's space, block i
+                    modified_actions[i] = Action.STAY
+                elif j_invading_i and not i_invading_j:
+                    # j is invading i's space, block j
+                    modified_actions[j] = Action.STAY
+                else:
+                    # Neither invading, or both invading (swap) - lower ID has priority
+                    modified_actions[max(i, j)] = Action.STAY
 
         return modified_actions
 
