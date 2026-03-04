@@ -34,7 +34,35 @@ python run_experiment.py --verify
 
 # Larger scale experiment
 python run_experiment.py --scale medium
+
+# Real MAPF benchmarks (Berlin city map)
+python run_mapf_experiment.py --agents 8 --episodes 50
 ```
+
+## Interactive Demo
+
+```bash
+# Install demo dependencies
+pip install streamlit pandas
+
+# Launch interactive web demo
+streamlit run demo/app.py
+```
+
+The demo lets you:
+- Adjust grid size (5×5, 7×7, 10×10)
+- Change number of agents (2-4)
+- Watch MARL vs RSCT side-by-side in real-time
+- See cumulative collision charts
+
+## Jupyter Notebook
+
+```bash
+# Launch analysis notebook
+jupyter notebook notebooks/analysis.ipynb
+```
+
+Generates publication-ready figures and LaTeX tables.
 
 ## Results
 
